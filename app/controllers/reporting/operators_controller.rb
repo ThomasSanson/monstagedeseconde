@@ -5,7 +5,7 @@ module Reporting
 
     def index
       authorize! :index, Acl::Reporting.new(user: current_user, params: params)
-      @operators = Operator.all.order(:name)
+      @operators = Operator.order(:name)
       respond_to do |format|
         format.xlsx do
           @school_year = params[:school_year] || SchoolYear::Current.new.beginning_of_period.year
